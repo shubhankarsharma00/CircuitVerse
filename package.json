@@ -1,0 +1,24 @@
+{
+  "name": "CircuitVerse",
+  "version": "1.0.0",
+  "repository": "git@github.com:CircuitVerse/CircuitVerse.git",
+  "license": "MIT",
+  "scripts": {
+    "lint": "eslint ./public/js/",
+    "postinstall": "opencollective-postinstall || true"
+  },
+  "devDependencies": {
+    "eslint": "^5.15.1",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-react": "^7.12.4"
+  },
+  "dependencies": {
+    "opencollective-postinstall": "^2.0.2"
+  },
+  "collective": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/CircuitVerse"
+  }
+}

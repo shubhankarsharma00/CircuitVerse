@@ -1,7 +1,10 @@
-# README
+# CircuitVerse
 
-[![Gitter](https://badges.gitter.im/CircuitVerse/community.svg)](https://gitter.im/CircuitVerse/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![Financial Contributors on Open Collective](https://opencollective.com/CircuitVerse/all/badge.svg?label=financial+contributors)](https://opencollective.com/CircuitVerse) [![Slack](https://img.shields.io/badge/chat-on_slack-pink.svg)](https://join.slack.com/t/circuitverse-team/shared_invite/enQtNjc4MzcyNDE5OTA3LTdjYTM5NjFiZWZlZGI2MmU1MmYzYzczNmZlZDg5MjYxYmQ4ODRjMjQxM2UyMWI5ODUzODQzMDU2ZDEzNjI4NmE)
 [![CircleCI](https://circleci.com/gh/CircuitVerse/CircuitVerse.svg?style=svg)](https://circleci.com/gh/CircuitVerse/CircuitVerse)
+[![Coverage Status](https://coveralls.io/repos/github/CircuitVerse/CircuitVerse/badge.svg?branch=master)](https://coveralls.io/github/CircuitVerse/CircuitVerse?branch=master)
+
+[Join Mailing List](https://circuitverse.us20.list-manage.com/subscribe?u=89207abda49deef3ba56f1411&id=29473194d6)
 
 ## Versions
 
@@ -28,8 +31,8 @@ Please go through the [Contribution Guidelines](CONTRIBUTING.md) before going fo
 **Note:** You might want to use the docker instructions if you do not want to setup your own environment.
 
 * Install ruby using RVM, use ruby-2.5.1
-* Install Dependencies: `bundle install --with mysql` (If you wanto use pg use `bundle install --with pg`)
-* Configure your DB in config/database.yml, copy config/database.yml.example
+* Install Dependencies: `bundle install `
+* Configure your DB in config/database.yml, copy config/database.example.yml (Note : check for postgres password and update it in place of "postgres")
 * Create database: `rails db:create`
 * Run Migrations: `rails db:migrate`
 * At this point, local development can be started with ```rails s -b 127.0.0.1 -p 8080```
@@ -38,6 +41,12 @@ Additional software:
 * Install imagemagick
 * Start Redis server process.
 * To start sidekiq: `bundle exec sidekiq -e development -q default -q mailers -d -L tmp/sidekiq.log` (In development)
+
+### Setup in cloud
+You can use gitpod to develop CircuitVerse in the cloud.
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/CircuitVerse/CircuitVerse)
+
 
 ## Running Tests
 
@@ -95,6 +104,45 @@ bundle exec sidekiq -e production -q default -q mailers -d -L tmp/sidekiq.log` (
 ## Code of Conduct
 
 This repository contains the [Code of Conduct](./code-of-conduct.md) of [CircuitVerse](https://circuitverse.org) Community.
+
+## CircuitVerse Community
+
+We would love to hear from you :smile:
+Here are links to our:
+
+[![Slack](https://img.shields.io/badge/chat-on_slack-pink.svg)](https://join.slack.com/t/circuitverse-team/shared_invite/enQtNjc4MzcyNDE5OTA3LTdjYTM5NjFiZWZlZGI2MmU1MmYzYzczNmZlZDg5MjYxYmQ4ODRjMjQxM2UyMWI5ODUzODQzMDU2ZDEzNjI4NmE)
+
+[![Discord](https://img.shields.io/discord/552660710232948749.svg)](https://discord.gg/95x8H7b) - This is an official fan communication channel. Thanks to [@jbox1](https://github.com/jbox144) for this initiative.
+
+## Contributors
+
+### Code Contributors
+
+This project exists thanks to all the people who contribute. [[Contribute](CONTRIBUTING.md)].
+<a href="https://github.com/CircuitVerse/CircuitVerse/graphs/contributors"><img src="https://opencollective.com/CircuitVerse/contributors.svg?width=890&button=false" /></a>
+
+### Financial Contributors
+
+Become a financial contributor and help us sustain our community. [[Contribute](https://opencollective.com/CircuitVerse/contribute)]
+
+#### Individuals
+
+<a href="https://opencollective.com/CircuitVerse"><img src="https://opencollective.com/CircuitVerse/individuals.svg?width=890"></a>
+
+#### Organizations
+
+Support this project with your organization. Your logo will show up here with a link to your website. [[Contribute](https://opencollective.com/CircuitVerse/contribute)]
+
+<a href="https://opencollective.com/CircuitVerse/organization/0/website"><img src="https://opencollective.com/CircuitVerse/organization/0/avatar.svg"></a>
+<a href="https://opencollective.com/CircuitVerse/organization/1/website"><img src="https://opencollective.com/CircuitVerse/organization/1/avatar.svg"></a>
+<a href="https://opencollective.com/CircuitVerse/organization/2/website"><img src="https://opencollective.com/CircuitVerse/organization/2/avatar.svg"></a>
+<a href="https://opencollective.com/CircuitVerse/organization/3/website"><img src="https://opencollective.com/CircuitVerse/organization/3/avatar.svg"></a>
+<a href="https://opencollective.com/CircuitVerse/organization/4/website"><img src="https://opencollective.com/CircuitVerse/organization/4/avatar.svg"></a>
+<a href="https://opencollective.com/CircuitVerse/organization/5/website"><img src="https://opencollective.com/CircuitVerse/organization/5/avatar.svg"></a>
+<a href="https://opencollective.com/CircuitVerse/organization/6/website"><img src="https://opencollective.com/CircuitVerse/organization/6/avatar.svg"></a>
+<a href="https://opencollective.com/CircuitVerse/organization/7/website"><img src="https://opencollective.com/CircuitVerse/organization/7/avatar.svg"></a>
+<a href="https://opencollective.com/CircuitVerse/organization/8/website"><img src="https://opencollective.com/CircuitVerse/organization/8/avatar.svg"></a>
+<a href="https://opencollective.com/CircuitVerse/organization/9/website"><img src="https://opencollective.com/CircuitVerse/organization/9/avatar.svg"></a>
 
 ## License
 
