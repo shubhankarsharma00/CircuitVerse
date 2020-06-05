@@ -1,0 +1,20 @@
+name: docs
+
+on:
+  push:
+    branches:
+      - setting-up-webpacker
+      - new-docs
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: jsdocs-dep
+        run: npm  install jsdoc jsdoc-export-default-interop better-docs  --production --parseable && npm run build:docs
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+          publish_dir: ./out
