@@ -1,0 +1,207 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> utils.js</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    API Documentation
+                </a>
+                <div class="dropdown is-hoverable is-right">
+                    <a class="dropdown-trigger link">
+                        Tutorials
+                        <i class="fas fa-chevron-down fa-xs"></i>
+                    </a>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-content">
+                        
+                        </div>
+                    </div>
+                </div>
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Modules</h3><ul><li><a href="module-plotArea.html">plotArea</a></li></ul><h3>Classes</h3><ul><li><a href="CanvasGradient.html">CanvasGradient</a></li><li><a href="module.exports.html">exports</a></li><li><a href="module-plotArea-StopWatch.html">StopWatch</a></li><li><a href="module-wire.module.exports.html">exports</a></li></ul><h3>Global</h3><ul><li><a href="global.html#absX">absX</a></li><li><a href="global.html#absY">absY</a></li><li><a href="global.html#add">add</a></li><li><a href="global.html#addImmediate">addImmediate</a></li><li><a href="global.html#addInputs">addInputs</a></li><li><a href="global.html#baseSetup">baseSetup</a></li><li><a href="global.html#buildCircuit">buildCircuit</a></li><li><a href="global.html#cancelLayout">cancelLayout</a></li><li><a href="global.html#canvasMessageData">canvasMessageData</a></li><li><a href="global.html#centerFocus">centerFocus</a></li><li><a href="global.html#changeCircuitName">changeCircuitName</a></li><li><a href="global.html#changeClockEnable">changeClockEnable</a></li><li><a href="global.html#changeLightMode">changeLightMode</a></li><li><a href="global.html#changePropagationDelay">changePropagationDelay</a></li><li><a href="global.html#checkDeleted">checkDeleted</a></li><li><a href="global.html#checkDependency">checkDependency</a></li><li><a href="global.html#checkHover">checkHover</a></li><li><a href="global.html#clockTick">clockTick</a></li><li><a href="global.html#connect">connect</a></li><li><a href="global.html#connectWireLess">connectWireLess</a></li><li><a href="global.html#constructNodeConnections">constructNodeConnections</a></li><li><a href="global.html#converToIntermediate">converToIntermediate</a></li><li><a href="global.html#copy">copy</a></li><li><a href="global.html#copyFrom">copyFrom</a></li><li><a href="global.html#createBooleanPrompt">createBooleanPrompt</a></li><li><a href="global.html#createCombinationalAnalysisPrompt">createCombinationalAnalysisPrompt</a></li><li><a href="global.html#createSubCircuitPrompt">createSubCircuitPrompt</a></li><li><a href="global.html#ctx">ctx</a></li><li><a href="global.html#ctxPos">ctxPos</a></li><li><a href="global.html#cut">cut</a></li><li><a href="global.html#decreaseLayoutHeight">decreaseLayoutHeight</a></li><li><a href="global.html#decreaseLayoutWidth">decreaseLayoutWidth</a></li><li><a href="global.html#delete">delete</a></li><li><a href="global.html#deleteCurrentCircuit">deleteCurrentCircuit</a></li><li><a href="global.html#deleteNodes">deleteNodes</a></li><li><a href="global.html#determine_label">determine_label</a></li><li><a href="global.html#determineLabel">determineLabel</a></li><li><a href="global.html#disconnectWireLess">disconnectWireLess</a></li><li><a href="global.html#drag">drag</a></li><li><a href="global.html#draw">draw</a></li><li><a href="global.html#errorDetected">errorDetected</a></li><li><a href="global.html#errorDetectedGet">errorDetectedGet</a></li><li><a href="global.html#errorDetectedSet">errorDetectedSet</a></li><li><a href="global.html#escapeHtml">escapeHtml</a></li><li><a href="global.html#extractNode">extractNode</a></li><li><a href="global.html#findNode">findNode</a></li><li><a href="global.html#fixDirection">fixDirection</a></li><li><a href="global.html#fixLayout">fixLayout</a></li><li><a href="global.html#flipBits">flipBits</a></li><li><a href="global.html#forceResetNodes">forceResetNodes</a></li><li><a href="global.html#forceResetNodesSet">forceResetNodesSet</a></li><li><a href="global.html#generateVerilog">generateVerilog</a></li><li><a href="global.html#getDependencies">getDependencies</a></li><li><a href="global.html#gridUpdate">gridUpdate</a></li><li><a href="global.html#gridUpdateSet">gridUpdateSet</a></li><li><a href="global.html#hideContextMenu">hideContextMenu</a></li><li><a href="global.html#hideProperties">hideProperties</a></li><li><a href="global.html#increaseLayoutHeight">increaseLayoutHeight</a></li><li><a href="global.html#increaseLayoutWidth">increaseLayoutWidth</a></li><li><a href="global.html#isEmpty">isEmpty</a></li><li><a href="global.html#isHover">isHover</a></li><li><a href="global.html#isResolvable">isResolvable</a></li><li><a href="global.html#isVerilogResolvable">isVerilogResolvable</a></li><li><a href="global.html#layoutMode">layoutMode</a></li><li><a href="global.html#layoutResetNodes">layoutResetNodes</a></li><li><a href="global.html#layoutTitleDown">layoutTitleDown</a></li><li><a href="global.html#layoutTitleLeft">layoutTitleLeft</a></li><li><a href="global.html#layoutTitleRight">layoutTitleRight</a></li><li><a href="global.html#layoutTitleUp">layoutTitleUp</a></li><li><a href="global.html#layoutUpdate">layoutUpdate</a></li><li><a href="global.html#loadNode">loadNode</a></li><li><a href="global.html#loadSubCircuit">loadSubCircuit</a></li><li><a href="global.html#makeConnections">makeConnections</a></li><li><a href="global.html#menuItemClicked">menuItemClicked</a></li><li><a href="global.html#miniMapArea">miniMapArea</a></li><li><a href="global.html#newBitWidth">newBitWidth</a></li><li><a href="global.html#newCircuit">newCircuit</a></li><li><a href="global.html#newDirection">newDirection</a></li><li><a href="global.html#nodeConnect">nodeConnect</a></li><li><a href="global.html#normalize">normalize</a></li><li><a href="global.html#objectSelection">objectSelection</a></li><li><a href="global.html#objectSelectionSet">objectSelectionSet</a></li><li><a href="global.html#paneLayout">paneLayout</a></li><li><a href="global.html#paste">paste</a></li><li><a href="global.html#play">play</a></li><li><a href="global.html#pop">pop</a></li><li><a href="global.html#prevPropertyObj">prevPropertyObj</a></li><li><a href="global.html#processVerilog">processVerilog</a></li><li><a href="global.html#reBuildCircuit">reBuildCircuit</a></li><li><a href="global.html#refresh">refresh</a></li><li><a href="global.html#removeConnections">removeConnections</a></li><li><a href="global.html#removePropagation">removePropagation</a></li><li><a href="global.html#renderCanvas">renderCanvas</a></li><li><a href="global.html#renderLayout">renderLayout</a></li><li><a href="global.html#replace">replace</a></li><li><a href="global.html#reset">reset</a></li><li><a href="global.html#resetup">resetup</a></li><li><a href="global.html#resolve">resolve</a></li><li><a href="global.html#runTest">runTest</a></li><li><a href="global.html#saveLayout">saveLayout</a></li><li><a href="global.html#saveObject">saveObject</a></li><li><a href="global.html#scheduleUpdate">scheduleUpdate</a></li><li><a href="global.html#selectAll">selectAll</a></li><li><a href="global.html#setDimensions">setDimensions</a></li><li><a href="global.html#setHeight">setHeight</a></li><li><a href="global.html#setLabel">setLabel</a></li><li><a href="global.html#setup">setup</a></li><li><a href="global.html#setupElementLists">setupElementLists</a></li><li><a href="global.html#setupEnvironment">setupEnvironment</a></li><li><a href="global.html#setupUI">setupUI</a></li><li><a href="global.html#showContextMenu">showContextMenu</a></li><li><a href="global.html#showError">showError</a></li><li><a href="global.html#showProperties">showProperties</a></li><li><a href="global.html#simulationArea">simulationArea</a></li><li><a href="global.html#startDragging">startDragging</a></li><li><a href="global.html#swap">swap</a></li><li><a href="global.html#switchCircuit">switchCircuit</a></li><li><a href="global.html#tempBuffer">tempBuffer</a></li><li><a href="global.html#toggleLayoutMode">toggleLayoutMode</a></li><li><a href="global.html#toggleLayoutTitle">toggleLayoutTitle</a></li><li><a href="global.html#uniq">uniq</a></li><li><a href="global.html#uniqueIdCounter">uniqueIdCounter</a></li><li><a href="global.html#update">update</a></li><li><a href="global.html#updateCanvas">updateCanvas</a></li><li><a href="global.html#updateCanvasSet">updateCanvasSet</a></li><li><a href="global.html#updatePosition">updatePosition</a></li><li><a href="global.html#updatePositionSet">updatePositionSet</a></li><li><a href="global.html#updateRotation">updateRotation</a></li><li><a href="global.html#updateScope">updateScope</a></li><li><a href="global.html#updateSelectionsAndPane">updateSelectionsAndPane</a></li><li><a href="global.html#updateSimulation">updateSimulation</a></li><li><a href="global.html#updateSimulationSet">updateSimulationSet</a></li><li><a href="global.html#updateSubcircuit">updateSubcircuit</a></li><li><a href="global.html#updateSubcircuitSet">updateSubcircuitSet</a></li><li><a href="global.html#verilogName">verilogName</a></li><li><a href="global.html#willBeUpdated">willBeUpdated</a></li><li><a href="global.html#willBeUpdatedSet">willBeUpdatedSet</a></li><li><a href="global.html#wireToBeChecked">wireToBeChecked</a></li><li><a href="global.html#wireToBeCheckedSet">wireToBeCheckedSet</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Source</p>
+                    <h1>utils.js</h1>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import simulationArea from './simulationArea';
+import {
+    scheduleUpdate, play, updateCanvasSet, errorDetectedSet, errorDetectedGet,
+} from './engine';
+
+window.globalScope = undefined;
+window.lightMode = false; // To be deprecated
+window.projectId = undefined;
+window.id = undefined;
+window.loading = false; // Flag - all assets are loaded
+
+var prevErrorMessage; // Global variable for error messages
+var prevShowMessage; // Global variable for error messages
+export function generateId() {
+    var id = '';
+    var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+    for (var i = 0; i &lt; 20; i++) { id += possible.charAt(Math.floor(Math.random() * possible.length)); }
+
+    return id;
+}
+
+// To strip tags from input
+export function stripTags(string = '') {
+    return string.replace(/(&lt;([^>]+)>)/ig, '').trim();
+}
+
+
+export function clockTick() {
+    if (!simulationArea.clockEnabled) return;
+    if (errorDetectedGet()) return;
+    updateCanvasSet(true);
+    globalScope.clockTick();
+    play();
+    scheduleUpdate(0, 20);
+}
+
+/**
+ * Helper function to show error
+ * @param {string} error -The error to be shown
+ * @category utils
+ */
+export function showError(error) {
+    errorDetectedSet(true);
+    // if error ha been shown return
+    if (error === prevErrorMessage) return;
+    prevErrorMessage = error;
+    var id = Math.floor(Math.random() * 10000);
+    $('#MessageDiv').append(`&lt;div class='alert alert-danger' role='alert' id='${id}'> ${error}&lt;/div>`);
+    setTimeout(() => {
+        prevErrorMessage = undefined;
+        $(`#${id}`).fadeOut();
+    }, 1500);
+}
+
+// Helper function to show message
+export function showMessage(mes) {
+    if (mes === prevShowMessage) return;
+    prevShowMessage = mes;
+    var id = Math.floor(Math.random() * 10000);
+    $('#MessageDiv').append(`&lt;div class='alert alert-success' role='alert' id='${id}'> ${mes}&lt;/div>`);
+    setTimeout(() => {
+        prevShowMessage = undefined;
+        $(`#${id}`).fadeOut();
+    }, 2500);
+}
+
+export function distance(x1, y1, x2, y2) {
+    return Math.sqrt((x2 - x1) ** 2) + ((y2 - y1) ** 2);
+}
+
+/**
+ * Helper function to return unique list
+ * @param {Array} a - any array
+ * @category utils
+ */
+export function uniq(a) {
+    var seen = {};
+    const tmp = a.filter((item) => (seen.hasOwnProperty(item) ? false : (seen[item] = true)));
+    return tmp;
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
+                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+</body>
+</html>

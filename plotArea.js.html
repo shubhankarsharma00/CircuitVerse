@@ -1,0 +1,428 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> plotArea.js</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    API Documentation
+                </a>
+                <div class="dropdown is-hoverable is-right">
+                    <a class="dropdown-trigger link">
+                        Tutorials
+                        <i class="fas fa-chevron-down fa-xs"></i>
+                    </a>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-content">
+                        
+                        </div>
+                    </div>
+                </div>
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Modules</h3><ul><li><a href="module-plotArea.html">plotArea</a></li></ul><h3>Classes</h3><ul><li><a href="CanvasGradient.html">CanvasGradient</a></li><li><a href="module.exports.html">exports</a></li><li><a href="module-plotArea-StopWatch.html">StopWatch</a></li><li><a href="module-wire.module.exports.html">exports</a></li></ul><h3>Global</h3><ul><li><a href="global.html#absX">absX</a></li><li><a href="global.html#absY">absY</a></li><li><a href="global.html#add">add</a></li><li><a href="global.html#addImmediate">addImmediate</a></li><li><a href="global.html#addInputs">addInputs</a></li><li><a href="global.html#baseSetup">baseSetup</a></li><li><a href="global.html#buildCircuit">buildCircuit</a></li><li><a href="global.html#cancelLayout">cancelLayout</a></li><li><a href="global.html#canvasMessageData">canvasMessageData</a></li><li><a href="global.html#centerFocus">centerFocus</a></li><li><a href="global.html#changeCircuitName">changeCircuitName</a></li><li><a href="global.html#changeClockEnable">changeClockEnable</a></li><li><a href="global.html#changeLightMode">changeLightMode</a></li><li><a href="global.html#changePropagationDelay">changePropagationDelay</a></li><li><a href="global.html#checkDeleted">checkDeleted</a></li><li><a href="global.html#checkDependency">checkDependency</a></li><li><a href="global.html#checkHover">checkHover</a></li><li><a href="global.html#clockTick">clockTick</a></li><li><a href="global.html#connect">connect</a></li><li><a href="global.html#connectWireLess">connectWireLess</a></li><li><a href="global.html#constructNodeConnections">constructNodeConnections</a></li><li><a href="global.html#converToIntermediate">converToIntermediate</a></li><li><a href="global.html#copy">copy</a></li><li><a href="global.html#copyFrom">copyFrom</a></li><li><a href="global.html#createBooleanPrompt">createBooleanPrompt</a></li><li><a href="global.html#createCombinationalAnalysisPrompt">createCombinationalAnalysisPrompt</a></li><li><a href="global.html#createSubCircuitPrompt">createSubCircuitPrompt</a></li><li><a href="global.html#ctx">ctx</a></li><li><a href="global.html#ctxPos">ctxPos</a></li><li><a href="global.html#cut">cut</a></li><li><a href="global.html#decreaseLayoutHeight">decreaseLayoutHeight</a></li><li><a href="global.html#decreaseLayoutWidth">decreaseLayoutWidth</a></li><li><a href="global.html#delete">delete</a></li><li><a href="global.html#deleteCurrentCircuit">deleteCurrentCircuit</a></li><li><a href="global.html#deleteNodes">deleteNodes</a></li><li><a href="global.html#determine_label">determine_label</a></li><li><a href="global.html#determineLabel">determineLabel</a></li><li><a href="global.html#disconnectWireLess">disconnectWireLess</a></li><li><a href="global.html#drag">drag</a></li><li><a href="global.html#draw">draw</a></li><li><a href="global.html#errorDetected">errorDetected</a></li><li><a href="global.html#errorDetectedGet">errorDetectedGet</a></li><li><a href="global.html#errorDetectedSet">errorDetectedSet</a></li><li><a href="global.html#escapeHtml">escapeHtml</a></li><li><a href="global.html#extractNode">extractNode</a></li><li><a href="global.html#findNode">findNode</a></li><li><a href="global.html#fixDirection">fixDirection</a></li><li><a href="global.html#fixLayout">fixLayout</a></li><li><a href="global.html#flipBits">flipBits</a></li><li><a href="global.html#forceResetNodes">forceResetNodes</a></li><li><a href="global.html#forceResetNodesSet">forceResetNodesSet</a></li><li><a href="global.html#generateVerilog">generateVerilog</a></li><li><a href="global.html#getDependencies">getDependencies</a></li><li><a href="global.html#gridUpdate">gridUpdate</a></li><li><a href="global.html#gridUpdateSet">gridUpdateSet</a></li><li><a href="global.html#hideContextMenu">hideContextMenu</a></li><li><a href="global.html#hideProperties">hideProperties</a></li><li><a href="global.html#increaseLayoutHeight">increaseLayoutHeight</a></li><li><a href="global.html#increaseLayoutWidth">increaseLayoutWidth</a></li><li><a href="global.html#isEmpty">isEmpty</a></li><li><a href="global.html#isHover">isHover</a></li><li><a href="global.html#isResolvable">isResolvable</a></li><li><a href="global.html#isVerilogResolvable">isVerilogResolvable</a></li><li><a href="global.html#layoutMode">layoutMode</a></li><li><a href="global.html#layoutResetNodes">layoutResetNodes</a></li><li><a href="global.html#layoutTitleDown">layoutTitleDown</a></li><li><a href="global.html#layoutTitleLeft">layoutTitleLeft</a></li><li><a href="global.html#layoutTitleRight">layoutTitleRight</a></li><li><a href="global.html#layoutTitleUp">layoutTitleUp</a></li><li><a href="global.html#layoutUpdate">layoutUpdate</a></li><li><a href="global.html#loadNode">loadNode</a></li><li><a href="global.html#loadSubCircuit">loadSubCircuit</a></li><li><a href="global.html#makeConnections">makeConnections</a></li><li><a href="global.html#menuItemClicked">menuItemClicked</a></li><li><a href="global.html#miniMapArea">miniMapArea</a></li><li><a href="global.html#newBitWidth">newBitWidth</a></li><li><a href="global.html#newCircuit">newCircuit</a></li><li><a href="global.html#newDirection">newDirection</a></li><li><a href="global.html#nodeConnect">nodeConnect</a></li><li><a href="global.html#normalize">normalize</a></li><li><a href="global.html#objectSelection">objectSelection</a></li><li><a href="global.html#objectSelectionSet">objectSelectionSet</a></li><li><a href="global.html#paneLayout">paneLayout</a></li><li><a href="global.html#paste">paste</a></li><li><a href="global.html#play">play</a></li><li><a href="global.html#pop">pop</a></li><li><a href="global.html#prevPropertyObj">prevPropertyObj</a></li><li><a href="global.html#processVerilog">processVerilog</a></li><li><a href="global.html#reBuildCircuit">reBuildCircuit</a></li><li><a href="global.html#refresh">refresh</a></li><li><a href="global.html#removeConnections">removeConnections</a></li><li><a href="global.html#removePropagation">removePropagation</a></li><li><a href="global.html#renderCanvas">renderCanvas</a></li><li><a href="global.html#renderLayout">renderLayout</a></li><li><a href="global.html#replace">replace</a></li><li><a href="global.html#reset">reset</a></li><li><a href="global.html#resetup">resetup</a></li><li><a href="global.html#resolve">resolve</a></li><li><a href="global.html#runTest">runTest</a></li><li><a href="global.html#saveLayout">saveLayout</a></li><li><a href="global.html#saveObject">saveObject</a></li><li><a href="global.html#scheduleUpdate">scheduleUpdate</a></li><li><a href="global.html#selectAll">selectAll</a></li><li><a href="global.html#setDimensions">setDimensions</a></li><li><a href="global.html#setHeight">setHeight</a></li><li><a href="global.html#setLabel">setLabel</a></li><li><a href="global.html#setup">setup</a></li><li><a href="global.html#setupElementLists">setupElementLists</a></li><li><a href="global.html#setupEnvironment">setupEnvironment</a></li><li><a href="global.html#setupUI">setupUI</a></li><li><a href="global.html#showContextMenu">showContextMenu</a></li><li><a href="global.html#showError">showError</a></li><li><a href="global.html#showProperties">showProperties</a></li><li><a href="global.html#simulationArea">simulationArea</a></li><li><a href="global.html#startDragging">startDragging</a></li><li><a href="global.html#swap">swap</a></li><li><a href="global.html#switchCircuit">switchCircuit</a></li><li><a href="global.html#tempBuffer">tempBuffer</a></li><li><a href="global.html#toggleLayoutMode">toggleLayoutMode</a></li><li><a href="global.html#toggleLayoutTitle">toggleLayoutTitle</a></li><li><a href="global.html#uniq">uniq</a></li><li><a href="global.html#uniqueIdCounter">uniqueIdCounter</a></li><li><a href="global.html#update">update</a></li><li><a href="global.html#updateCanvas">updateCanvas</a></li><li><a href="global.html#updateCanvasSet">updateCanvasSet</a></li><li><a href="global.html#updatePosition">updatePosition</a></li><li><a href="global.html#updatePositionSet">updatePositionSet</a></li><li><a href="global.html#updateRotation">updateRotation</a></li><li><a href="global.html#updateScope">updateScope</a></li><li><a href="global.html#updateSelectionsAndPane">updateSelectionsAndPane</a></li><li><a href="global.html#updateSimulation">updateSimulation</a></li><li><a href="global.html#updateSimulationSet">updateSimulationSet</a></li><li><a href="global.html#updateSubcircuit">updateSubcircuit</a></li><li><a href="global.html#updateSubcircuitSet">updateSubcircuitSet</a></li><li><a href="global.html#verilogName">verilogName</a></li><li><a href="global.html#willBeUpdated">willBeUpdated</a></li><li><a href="global.html#willBeUpdatedSet">willBeUpdatedSet</a></li><li><a href="global.html#wireToBeChecked">wireToBeChecked</a></li><li><a href="global.html#wireToBeCheckedSet">wireToBeCheckedSet</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Source</p>
+                    <h1>plotArea.js</h1>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @module plotArea
+ * @category plotArea
+ */
+/**
+ * function to add the plotting div
+ * @memberof module:plotArea
+ * @category plotArea
+ */
+function addPlot() {
+    plotArea.ox = 0;
+    plotArea.oy = 0;
+    plotArea.count = 0;
+    plotArea.unit = 1000;// parseInt(prompt("Enter unit of time(in milli seconds)"));
+    plotArea.specificTimeX = 0;
+}
+
+/**
+ * Used as a stopwatch to
+ * record time side of the plot
+ * @category plotArea
+ */
+class StopWatch {
+    constructor() {
+        this.StartMilliseconds = 0;
+        this.ElapsedMilliseconds = 0;
+    }
+
+    /**
+     * @memberof StopWatch
+     * used to start the stopwatch
+     */
+    Start() {
+        this.StartMilliseconds = new Date().getTime();
+    }
+
+    /**
+    * @memberof StopWatch
+    * used to get time elapsed.
+    */
+    Stop() {
+        this.ElapsedMilliseconds = new Date().getTime() - this.StartMilliseconds;
+    }
+}
+
+/**
+ * @type {Object} plotArea
+ * @category plotArea
+ */
+const plotArea = {
+    ox: 0,
+    oy: 0,
+    unit: 0,
+    c: document.getElementById('plotArea'),
+
+    count: 0,
+    specificTimeX: 0,
+    scale: 1,
+    pixel: 100,
+    startTime: new Date(),
+    endTime: new Date(),
+    scroll: 1,
+    setup() {
+        this.c = document.getElementById('plotArea');
+        this.stopWatch = new StopWatch();
+        this.stopWatch.Start();
+        this.ctx = this.c.getContext('2d');
+        startPlot();
+        this.timeOutPlot = setInterval(() => {
+            plotArea.plot();
+        }, 100);
+    },
+    plot() {
+        if (globalScope.Flag.length == 0) {
+            this.c.width = this.c.height = 0;
+            return;
+        }
+        this.stopWatch.Stop();
+        var time = this.stopWatch.ElapsedMilliseconds;
+        this.c.width = document.getElementById('simulationArea').clientWidth; // innerWidth;
+
+        this.c.height = globalScope.Flag.length * 30 + 40;
+
+        // if(document.getElementById("plot").style.height!=this.c.height+"px"){
+        document.getElementById('plot').style.height = Math.min(this.c.height, 400);
+        document.getElementById('plot').style.width = this.c.width;
+        // }
+        // else if(document.getElementById("plot").style.width!=this.c.width+"px"){
+        // document.getElementById("plot").style.height = this.c.height ;
+        // document.getElementById("plot").style.width = this.c.width ;
+        // }
+
+        if (this.scroll) {
+            this.ox = Math.max(0, (time / this.unit) * this.pixel - this.c.width + 70);
+        } else if (!plotArea.mouseDown) {
+            this.ox -= plotArea.scrollAcc;
+            plotArea.scrollAcc *= 0.95;
+            if (this.ox &lt; 0) plotArea.scrollAcc = -0.2 + 0.2 * this.ox;
+            if (Math.abs(this.ox) &lt; 0.5) this.ox = 0;
+        }
+        var { ctx } = this;
+        this.clear(ctx);
+        ctx.fillStyle = 'black';
+        ctx.fillRect(0, 0, this.c.width, this.c.height);
+        var unit = (this.pixel / (plotArea.unit * plotArea.scale));
+        ctx.strokeStyle = 'cyan';
+        ctx.lineWidth = 2;
+        for (var i = 0; i &lt; globalScope.Flag.length; i++) {
+            var arr = globalScope.Flag[i].plotValues;
+
+            var j = 0;
+            // var start=arr[j][0];
+            if (globalScope.Flag[i].cachedIndex) { j = globalScope.Flag[i].cachedIndex; }
+
+
+            while (j &lt; arr.length &amp;&amp; 80 + (arr[j][0] * unit) - plotArea.ox &lt; 0) {
+                // console.log("HIT2");
+                j++;
+                // start=
+            }
+            while (j &lt; arr.length &amp;&amp; j > 0 &amp;&amp; 80 + (arr[j][0] * unit) - plotArea.ox > 0) {
+                // console.log("HIT1");
+                j--;
+                // start=
+            }
+            if (j) j--;
+            globalScope.Flag[i].cachedIndex = j;
+
+            for (; j &lt; arr.length; j++) {
+                var start = arr[j][0];
+
+                if (j + 1 == arr.length) { var end = time; } else { var end = arr[j + 1][0]; }
+
+                if (start &lt;= time) {
+                    if (globalScope.Flag[i].bitWidth == 1) {
+                        if (arr[j][1] !== undefined) {
+                            if (ctx.strokeStyle == '#000000') {
+                                ctx.stroke();
+                                ctx.beginPath();
+                                ctx.lineWidth = 2;
+                                //   ctx.moveTo(80+(start*unit)-plotArea.ox,2*(30+i*15-yOff)-plotArea.oy)
+                                ctx.strokeStyle = 'cyan';
+                            }
+                            var yOff = 5 * arr[j][1];
+                        } else {
+                            ctx.stroke();
+                            ctx.beginPath();
+                            // ctx.moveTo(80+(start*unit)-plotArea.ox,2*(30+i*15-yOff)-plotArea.oy);
+                            ctx.lineWidth = 12;
+                            ctx.strokeStyle = '#000000'; // DIABLED Z STATE FOR NOW
+                            yOff = 2.5;
+                        }
+                        ctx.lineTo(80 + (start * unit) - plotArea.ox, 2 * (30 + i * 15 - yOff) - plotArea.oy);
+                        ctx.lineTo(80 + (end * unit) - plotArea.ox, 2 * (30 + i * 15 - yOff) - plotArea.oy);
+                    } else {
+                        ctx.beginPath();
+                        ctx.moveTo(80 + (end * unit) - plotArea.ox, 55 + 30 * i - plotArea.oy);
+                        ctx.lineTo(80 + (end * unit) - 5 - plotArea.ox, 2 * (25 + i * 15) - plotArea.oy);
+                        ctx.lineTo(80 + (start * unit) + 5 - plotArea.ox, 2 * (25 + i * 15) - plotArea.oy);
+                        ctx.lineTo(80 + (start * unit) - plotArea.ox, 55 + 30 * i - plotArea.oy);
+                        ctx.lineTo(80 + (start * unit) + 5 - plotArea.ox, 2 * (30 + i * 15) - plotArea.oy);
+                        ctx.lineTo(80 + (end * unit) - 5 - plotArea.ox, 2 * (30 + i * 15) - plotArea.oy);
+                        ctx.lineTo(80 + (end * unit) - plotArea.ox, 55 + 30 * i - plotArea.oy);
+                        mid = 80 + ((end + start) / Math.round(plotArea.unit * plotArea.scale)) * this.pixel / 2;
+                        ctx.font = '12px Georgia';
+                        ctx.fillStyle = 'white';
+                        if ((start * unit) + 10 - plotArea.ox &lt;= 0 &amp;&amp; (end * unit) + 10 - plotArea.ox >= 0) {
+                            mid = 80 + ((end - 3000) / Math.round(plotArea.unit * plotArea.scale)) * this.pixel;
+                        }
+
+
+                        ctx.fillText(arr[j][1].toString() || 'x', mid - plotArea.ox, 57 + 30 * i - plotArea.oy);
+                        ctx.stroke();
+                    }
+                } else {
+                    break;
+                }
+
+                if (80 + (end * unit) - plotArea.ox > this.c.width) break;
+            }
+
+            ctx.stroke();
+            ctx.beginPath();
+        }
+        // 2 rectangles showing the time and labels
+
+        ctx.fillStyle = '#eee';
+        ctx.fillRect(0, 0, this.c.width, 30);
+        ctx.font = '14px Georgia';
+        ctx.fillStyle = 'black';
+        for (var i = 1; i * Math.round(plotArea.unit * plotArea.scale) &lt;= time + Math.round(plotArea.unit * plotArea.scale); i++) {
+            ctx.fillText(`${Math.round(plotArea.unit * plotArea.scale) * i / 1000}s`, 48 + this.pixel * i - plotArea.ox, 20);
+        }
+
+        ctx.fillStyle = '#eee';
+        ctx.fillRect(0, 0, 75, this.c.height);
+        ctx.font = '15px Georgia';
+        ctx.fillStyle = 'black';
+        for (var i = 0; i &lt; globalScope.Flag.length; i++) {
+            ctx.fillText(globalScope.Flag[i].identifier, 5, 2 * (25 + i * 15) - plotArea.oy);
+            ctx.fillRect(0, 2 * (13 + i * 15) + 4 - plotArea.oy, 75, 3);
+        }
+        ctx.fillStyle = '#eee';
+        ctx.fillRect(0, 0, 75, 30);
+        ctx.fillStyle = 'black';
+        ctx.font = '16px Georgia';
+        ctx.fillText('Time', 10, 20);
+        ctx.strokeStyle = 'black';
+        ctx.moveTo(0, 25);
+        ctx.lineTo(75, 25);
+        // for yellow line to show specific time
+        var specificTime = (plotArea.specificTimeX + plotArea.ox - 80) * Math.round(plotArea.unit * plotArea.scale) / (this.pixel);
+        // ctx.strokeStyle = 'white';
+        // ctx.moveTo(plotArea.specificTimeX,0);
+        // ctx.lineTo(plotArea.specificTimeX,plotArea.c.height);
+        // ctx.stroke();
+        if (1.115 * plotArea.specificTimeX >= 80) {
+            ctx.fillStyle = 'black';
+            ctx.fillRect(plotArea.specificTimeX - 35, 0, 70, 30);
+            ctx.fillStyle = 'red';
+            ctx.fillRect(plotArea.specificTimeX - 30, 2, 60, 26);
+            ctx.font = '12px Georgia';
+            ctx.fillStyle = 'black';
+            ctx.fillText(`${Math.round(specificTime)}ms`, plotArea.specificTimeX - 25, 20);
+        }
+        // borders
+        ctx.strokeStyle = 'black';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.lineTo(0, this.c.height);
+        //   ctx.fillRect(0, 0, 3, this.c.height);
+
+        ctx.moveTo(74, 0);
+        ctx.lineTo(74, this.c.height);
+        //   ctx.fillRect(74, 0, 3, this.c.height);
+
+        ctx.moveTo(0, 0);
+        ctx.lineTo(this.c.width, 0);
+        //   ctx.fillRect(0, 0, this.c.width, 3);
+
+        // ctx.moveTo(0,27);
+        // ctx.lineTo(this.c.width,27);
+        //   ctx.fillRect(0, 27, this.c.width, 3);
+        ctx.stroke();
+    },
+    clear(ctx) {
+        ctx.clearRect(0, 0, plotArea.c.width, plotArea.c.height);
+        // clearInterval(timeOutPlot);
+    },
+
+};
+export default plotArea;
+if (document.getElementById('plotArea') !== null) {
+    /**
+     * Event listeners for the Plot
+     */
+    document.getElementById('plotArea').addEventListener('mousedown', (e) => {
+        var rect = plotArea.c.getBoundingClientRect();
+        var x = e.clientX - rect.left;
+        plotArea.scrollAcc = 0;
+        if (e.shiftKey) {
+            plotArea.specificTimeX = x;
+        } else {
+            plotArea.scroll = 0;
+            plotArea.mouseDown = true;
+
+            plotArea.prevX = x;
+            console.log('HIT');
+        }
+    });
+    document.getElementById('plotArea').addEventListener('mouseup', (e) => {
+        plotArea.mouseDown = false;
+    });
+
+    document.getElementById('plotArea').addEventListener('mousemove', (e) => {
+        var rect = plotArea.c.getBoundingClientRect();
+        var x = e.clientX - rect.left;
+        if (!e.shiftKey &amp;&amp; plotArea.mouseDown) {
+            plotArea.ox -= x - plotArea.prevX;
+            plotArea.scrollAcc = x - plotArea.prevX;
+            plotArea.prevX = x;
+            // plotArea.ox=Math.max(0,plotArea.ox)
+        } else {
+            plotArea.mouseDown = false;
+        }
+    });
+}
+/**
+ * sets plot values of all flags and it add(s)Plot().
+ * @category plotArea
+ */
+function startPlot() {
+    plotArea.stopWatch.Start();
+    for (var i = 0; i &lt; globalScope.Flag.length; i++) {
+        globalScope.Flag[i].plotValues = [[0, globalScope.Flag[i].inp1.value]];
+        globalScope.Flag[i].cachedIndex = 0;
+    }
+    // play();
+    plotArea.scroll = 1;
+    addPlot();
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
+                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+</body>
+</html>
