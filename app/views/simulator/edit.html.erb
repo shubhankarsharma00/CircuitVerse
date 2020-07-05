@@ -9,6 +9,7 @@
 
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="/js/plugins/jquery.twbs-toggle-buttons.min.js"></script>
 <script src="/js/plugins/checkBo.min.js"></script>
 <script src="/js/plugins/jquery-pseudo-ripple.js"></script>
@@ -460,7 +461,6 @@
   </div>
 </div>
 
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
   var embed = false;
   var listenToSimulator=true
@@ -517,4 +517,28 @@
   $('#reportIssue').click(function() {
     var listenToSimulator=false
   })
+</script>
+
+
+<script>
+  $(document).tooltip({
+    show: null,
+    track: true,
+    hide: false,
+    tooltipClass: "custom-tooltip-styling",
+});
+
+$(function(){
+    $(".btn-group-toggle").twbsToggleButtons();
+  });
+  
+$(function(){
+$("#openProjectDialog").checkBo();
+$(".download-dialog-section-2_2").checkBo();
+});
+
+$('.Layout-btn').ripple({
+duration: 500
+});
+
 </script>
