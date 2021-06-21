@@ -44,11 +44,36 @@ function TflipFlop(x, y, scope = globalScope, dir = "RIGHT") {
 }
 TflipFlop.prototype = Object.create(CircuitElement.prototype);
 TflipFlop.prototype.constructor = TflipFlop;
+TflipFlop.prototype.tooltipText = "T FlipFlop ToolTip :  Changes state / Toggles whenever the clock input is strobed.";
+TflipFlop.prototype.helplink = "https://docs.circuitverse.org/#/Sequential?id=t-flip-flop";
 TflipFlop.prototype.isResolvable = function() {
     if (this.reset.value == 1) return true;
     if (this.clockInp.value != undefined && this.dInp.value != undefined) return true;
     return false;
 }
+
+//add this to output the module
+TflipFlop.moduleVerilog = function(){
+return `
+module TflipFlop(q, q_inv, clk, t, a_rst, pre, en);
+  parameter WIDTH = 1;
+  output reg [WIDTH-1:0] q, q_inv;
+  input clk, a_rst, pre, en;
+  input [WIDTH-1:0] t;
+
+  always @ (posedge clk or posedge a_rst)
+    if (a_rst) begin
+      q <= 'b0;
+      q_inv <= 'b1;
+    end else if (en == 0) ;
+    else if (t) begin
+      q <= q ^ t;
+      q_inv <= ~q ^ t;
+    end
+endmodule
+`
+}
+
 TflipFlop.prototype.newBitWidth = function(bitWidth) {
     this.bitWidth = bitWidth;
     this.dInp.bitWidth = bitWidth;
@@ -151,6 +176,8 @@ function DflipFlop(x, y, scope = globalScope, dir = "RIGHT", bitWidth = 1) {
 }
 DflipFlop.prototype = Object.create(CircuitElement.prototype);
 DflipFlop.prototype.constructor = DflipFlop;
+DflipFlop.prototype.tooltipText = "D FlipFlop ToolTip : Introduces delay in timing circuit.";
+DflipFlop.prototype.helplink = "https://docs.circuitverse.org/#/Sequential?id=d-flip-flop";
 DflipFlop.prototype.isResolvable = function() {
 	return true;
     if (this.reset.value == 1) return true;
@@ -173,7 +200,7 @@ DflipFlop.prototype.resolve = function() {
         this.prevClockState = this.clockInp.value;
 
     }
-    else if (this.en.value == 1 || this.en.connections.length == 0) { // if(this.en.value==1) // Creating Infintite Loop, WHY ??
+    else if (this.en.value == 1 || this.en.connections.length == 0) { // if(this.en.value==1) // Creating Infinite Loop, WHY ??
 
         if (this.clockInp.value == this.prevClockState) {
             if (this.clockInp.value == 0 && this.dInp.value != undefined) {
@@ -195,6 +222,28 @@ DflipFlop.prototype.resolve = function() {
         simulationArea.simulationQueue.add(this.qOutput);
         simulationArea.simulationQueue.add(this.qInvOutput);
     }
+}
+
+//add this to output the module
+DflipFlop.moduleVerilog = function(){
+    return `
+module DflipFlop(q, q_inv, clk, d, a_rst, pre, en);
+  parameter WIDTH = 1;
+  output reg [WIDTH-1:0] q, q_inv;
+  input clk, a_rst, pre, en;
+  input [WIDTH-1:0] d;
+
+  always @ (posedge clk or posedge a_rst)
+    if (a_rst) begin
+      q <= 'b0;
+      q_inv <= 'b1;
+    end else if (en == 0) ;
+    else begin
+      q <= d;
+      q_inv <= ~d;
+    end
+endmodule
+`
 }
 DflipFlop.prototype.customSave = function() {
     var data = {
@@ -258,6 +307,8 @@ function Dlatch(x, y, scope = globalScope, dir = "RIGHT", bitWidth = 1) {
 }
 Dlatch.prototype = Object.create(CircuitElement.prototype);
 Dlatch.prototype.constructor = Dlatch;
+Dlatch.prototype.tooltipText = "D Latch : Single input Flip flop or D FlipFlop";
+Dlatch.prototype.helplink = "https://docs.circuitverse.org/#/Sequential?id=d-latch";
 Dlatch.prototype.isResolvable = function() {
     if (this.clockInp.value != undefined && this.dInp.value != undefined ) return true;
     return false;
@@ -344,6 +395,8 @@ function Random(x, y, scope = globalScope, dir = "RIGHT", bitWidth = 1) {
 }
 Random.prototype = Object.create(CircuitElement.prototype);
 Random.prototype.constructor = Random;
+Random.prototype.tooltipText = "Random ToolTip : Random Selected.";
+Random.prototype.helplink = "https://docs.circuitverse.org/#/inputElements?id=random";
 Random.prototype.isResolvable = function() {
     if (this.clockInp.value != undefined && ( this.maxValue.value != undefined || this.maxValue.connections.length == 0 ) )
         return true;
@@ -406,6 +459,24 @@ Random.prototype.customDraw = function() {
 
 }
 
+
+Random.moduleVerilog = function () {
+  return `
+module Random(val, clk, max);
+  parameter WIDTH = 1;
+  output reg [WIDTH-1:0] val;
+  input clk;
+  input [WIDTH-1:0] max;
+
+  always @ (posedge clk)
+    if (^max === 1'bX)
+      val = $urandom_range(0, {WIDTH{1'b1}});
+    else
+      val = $urandom_range(0, max);
+endmodule
+`;
+}
+
 function SRflipFlop(x, y, scope = globalScope, dir = "RIGHT") {
     CircuitElement.call(this, x, y, scope, dir, 1);
     this.directionFixed = true;
@@ -428,6 +499,8 @@ function SRflipFlop(x, y, scope = globalScope, dir = "RIGHT") {
 }
 SRflipFlop.prototype = Object.create(CircuitElement.prototype);
 SRflipFlop.prototype.constructor = SRflipFlop;
+SRflipFlop.prototype.tooltipText = "SR FlipFlop ToolTip : SR FlipFlop Selected.";
+SRflipFlop.prototype.helplink = "https://docs.circuitverse.org/#/Sequential?id=sr-flip-flop";
 SRflipFlop.prototype.newBitWidth = function(bitWidth) {
     this.bitWidth = bitWidth;
     this.dInp.bitWidth = bitWidth;
@@ -530,6 +603,8 @@ function JKflipFlop(x, y, scope = globalScope, dir = "RIGHT") {
 }
 JKflipFlop.prototype = Object.create(CircuitElement.prototype);
 JKflipFlop.prototype.constructor = JKflipFlop;
+JKflipFlop.prototype.tooltipText = "JK FlipFlop ToolTip : gated SR flip-flop with the addition of a clock input.";
+JKflipFlop.prototype.helplink = "https://docs.circuitverse.org/#/Sequential?id=jk-flip-flop";
 JKflipFlop.prototype.isResolvable = function() {
     if (this.reset.value == 1) return true;
     if (this.clockInp.value != undefined && this.J.value != undefined && this.K.value != undefined) return true;
@@ -656,6 +731,8 @@ function TTY(x, y, scope = globalScope, rows = 3, cols = 32) {
 }
 TTY.prototype = Object.create(CircuitElement.prototype);
 TTY.prototype.constructor = TTY;
+TTY.prototype.tooltipText = "TTY ToolTip : Tele typewriter selected.";
+TTY.prototype.helplink = "https://docs.circuitverse.org/#/Sequential?id=tty";
 TTY.prototype.changeRowSize = function(size) {
     if (size == undefined || size < 1 || size > 10) return;
     if (this.rows == size) return;
@@ -794,6 +871,8 @@ function Keyboard(x, y, scope = globalScope, bufferSize = 32) {
 }
 Keyboard.prototype = Object.create(CircuitElement.prototype);
 Keyboard.prototype.constructor = Keyboard;
+Keyboard.prototype.tooltipText = "Keyboard";
+Keyboard.prototype.helplink = "https://docs.circuitverse.org/#/Sequential?id=keyboard";
 Keyboard.prototype.changeBufferSize = function(size) {
     if (size == undefined || size < 20 || size > 100) return;
     if (this.bufferSize == size) return;
@@ -923,6 +1002,7 @@ function Clock(x, y, scope = globalScope, dir = "RIGHT") {
 }
 Clock.prototype = Object.create(CircuitElement.prototype);
 Clock.prototype.constructor = Clock;
+Clock.prototype.tooltipText = "Clock";
 Clock.prototype.customSave = function() {
     var data = {
         nodes: {
@@ -972,3 +1052,21 @@ Clock.prototype.customDraw = function() {
     ctx.stroke();
 
 }
+Clock.verilogInstructions = function() {
+    return "Clock - Use a single global clock\n";
+}
+/*
+Clock.moduleVerilog = function() {
+    return `
+module Clock(clk);
+  output reg clk;
+  always begin
+    #10
+    clk=1'b0;
+    #10
+    clk=1'b0;
+  end
+endmodule
+`
+}
+*/

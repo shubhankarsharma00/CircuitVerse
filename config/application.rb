@@ -9,7 +9,7 @@ Bundler.require(*Rails.groups)
 module Logix
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 5.1
+    config.load_defaults 6.0
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
@@ -17,7 +17,9 @@ module Logix
 
     # configuring mailer previews directory
     config.action_mailer.preview_path = "#{Rails.root}/lib/mailer_previews"
-
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
+    config.i18n.available_locales = [:en, :hi]
+    config.i18n.default_locale = :en
 
     # Site config
     config.site_url = "https://circuitverse.org/"
@@ -26,6 +28,6 @@ module Logix
     config.site_download_url = "https://circuitverse.org/simulator"
     config.site_image = "https://circuitverse.org/img/circuitverse2.svg"
     config.site_description = "Explore Digital circuits online with CircuitVerse. With our easy to use simulator interface, you will be building circuits in no time."
-    config.slack_url = "https://join.slack.com/t/circuitverse-team/shared_invite/enQtNjc4MzcyNDE5OTA3LTdjYTM5NjFiZWZlZGI2MmU1MmYzYzczNmZlZDg5MjYxYmQ4ODRjMjQxM2UyMWI5ODUzODQzMDU2ZDEzNjI4NmE"
+    config.slack_url = "https://circuitverse.org/slack"
   end
 end

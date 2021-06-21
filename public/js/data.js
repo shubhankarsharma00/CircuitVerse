@@ -8,9 +8,12 @@ function newCircuit(name, id) {
     if (id) scope.id = id;
     scopeList[scope.id] = scope;
     globalScope = scope;
-
+    var $windowsize = $('body').width();
+    var $sideBarsize = $('.side').width();
+    var $maxwidth = ($windowsize - $sideBarsize);
+    var resizer = "max-width:" + ($maxwidth - 30);
     $('.circuits').removeClass("current");
-    $('#tabsBar').append("<div class='circuits toolbarButton current' id='" + scope.id + "'>" + name + "</div>");
+    $('#tabsBar').append("<a href = '#' data-toggle = 'tooltip' title='" + name + "'><div class='circuits toolbarButton current' id='" + scope.id + "' style='" + resizer + "'>" + name + "<span class ='tabsCloseButton' onclick='deleteCurrentCircuit()'  ><i class='fa fa-times'></i></span></div></a>");
     $('.circuits').click(function() {
         switchCircuit(this.id)
     });
@@ -25,8 +28,9 @@ function newCircuit(name, id) {
 
 
 function changeCircuitName(name, id = globalScope.id) {
+    name = name || "Untitled";
     name = stripTags(name);
-    $('#' + id).html(name);
+    $('#' + id).html(name + "<span class ='tabsCloseButton' onclick='deleteCurrentCircuit()'  ><i class='fa fa-times'></i></span>");
     scopeList[id].name = name;
 }
 
@@ -37,18 +41,19 @@ function setProjectName(name) {
 }
 
 function clearProject() {
+    if (confirm("Would you like to clear the project?")){
     globalScope = undefined;
     scopeList = {};
     $('.circuits').remove();
     newCircuit("main");
     showMessage("Your project is as good as new!");
-
+    }
 }
 
 // Function used to start a new project while prompting confirmation from the user
 function newProject(verify) {
 
-    if (verify || projectSaved || !checkToSave() || confirm("What you like to start a new project? Any unsaved chanegs will be lost.")) {
+    if (verify || projectSaved || !checkToSave() || confirm("What you like to start a new project? Any unsaved changes will be lost.")) {
         clearProject();
         localStorage.removeItem("recover");
         window.location = "/simulator";
@@ -152,7 +157,7 @@ function generateSvg() {
 
 }
 
-// Function used to change the current focussedCircuit
+// Function used to change the current focusedCircuit
 // Disables layoutMode if enabled
 // Changes UI tab etc
 // Sets flags to make updates, resets most of the things
@@ -325,7 +330,7 @@ function generateDependencyOrder() {
 
 function deleteCurrentCircuit() {
     if (Object.keys(scopeList).length <= 1) {
-        showError("Atleast 2 circuits need to be there in order to delete a circuit.")
+        showError("At least 2 circuits need to be there in order to delete a circuit.")
         return;
     }
     var dependencies = "";
@@ -349,7 +354,7 @@ function deleteCurrentCircuit() {
         $('#' + globalScope.id).remove()
         delete scopeList[globalScope.id]
         switchCircuit(Object.keys(scopeList)[0])
-        showMessage("Circuit was successfuly deleted")
+        showMessage("Circuit was successfully deleted")
     } else
         showMessage("Circuit was not deleted")
 }
@@ -401,7 +406,7 @@ function generateSaveData(name) {
     for (id in scopeList)
         saveScope(id);
 
-    //covnvert to text
+    //convert to text
     data = JSON.stringify(data);
     return data;
 }
@@ -409,7 +414,7 @@ function generateSaveData(name) {
 // Function that is used to save image for display in the website
 function generateImageForOnline() {
 
-    simulationArea.lastSelected = undefined; // Unsellect any selections
+    simulationArea.lastSelected = undefined; // Unselect any selections
 
     // Fix aspect ratio to 1.6
     if (width > height * 1.6) {
@@ -424,7 +429,7 @@ function generateImageForOnline() {
     // Ensure image is approximately 700 x 440
     resolution = Math.min(700 / (simulationArea.maxWidth - simulationArea.minWidth), 440 / (simulationArea.maxHeight - simulationArea.minHeight));
 
-    data = generateImage("jpeg", "current", false, resolution, download = false);
+    data = generateImage("jpeg", "current", false, resolution, false);
 
     // Restores Focus
     globalScope.centerFocus(false);
@@ -441,8 +446,9 @@ function save() {
     if (!userSignedIn) {
         // user not signed in, save locally temporarily and force user to sign in
         localStorage.setItem("recover_login", data);
-        alert("You have to login to save the project, you will be redirected to the login page.")
-        window.location.href = "/users/sign_in"
+        // Asking user whether they want to login.
+        if(confirm("You have to login to save the project, you will be redirected to the login page.")) window.location.href = "/users/sign_in";
+        else $('.loadingIcon').fadeOut();
     } else if (logix_project_id == 0) {
 
         // Create new project - this part needs to be improved and optimised
@@ -556,7 +562,7 @@ function load(data) {
         // update and backup circuit once
         update(globalScope, true);
 
-        // Updating restricted element list initally on loading
+        // Updating restricted element list initially on loading
         updateRestrictedElementsInScope();
 
         scheduleBackup();
@@ -671,7 +677,7 @@ function loadScope(scope, data) {
 
             } else {
 
-                // Load everything else similarily
+                // Load everything else similarly
                 for (var j = 0; j < data[ML[i]].length; j++) {
                     loadModule(data[ML[i]][j], scope);
                 }
@@ -721,7 +727,7 @@ function loadScope(scope, data) {
 }
 
 
-// This fn shouldnt ideally exist. But temporary fix
+// This fn shouldn't ideally exist. But temporary fix
 function removeBugNodes(scope = globalScope) {
     var x = scope.allNodes.length
     for (var i = 0; i < x; i++) {
@@ -768,16 +774,16 @@ createSaveAsImgPrompt = function(scope = globalScope) {
 }
 
 // Function to delete offline project of selected id
-deleteOfflineProject = function (id) {
+deleteOfflineProject = function (projectId) {
     var projectList = JSON.parse(localStorage.getItem("projectList"));
-    var y = confirm("Are You Sure You Want To Delete Project " + projectList[id] + " ?");
-    if (y) {
-        delete projectList[id];
-        localStorage.removeItem(id);
+    var confirmation = confirm("Are You Sure You Want To Delete Project " + projectList[projectId] + " ?");
+    if (confirmation) {
+        delete projectList[projectId];
+        localStorage.removeItem(projectId);
         localStorage.setItem("projectList", JSON.stringify(projectList));
         $('#openProjectDialog').empty();
-        for (idd in projectList) {
-            $('#openProjectDialog').append('<label class="option"><input type="radio" name="projectId" value="' + idd + '" />' + projectList[idd] + '<i class="glyphicon glyphicon-trash deleteOff" onclick="deleteOfflineProject(\'' + idd + '\')"></i></label>');
+        for (id in projectList) {
+            $('#openProjectDialog').append('<label class="option"><input type="radio" name="projectId" value="' + id + '" />' + projectList[id] + '<i class="fa fa-times deleteOfflineProject" onclick="deleteOfflineProject(\'' + id + '\')"></i></label>');
         }
     }
 }
@@ -789,19 +795,19 @@ createOpenLocalPrompt = function() {
     var flag = true;
     for (id in projectList) {
         flag = false;
-        $('#openProjectDialog').append('<label class="option"><input type="radio" name="projectId" value="' + id + '" />' + projectList[id] + '<i class="glyphicon glyphicon-trash deleteOff" onclick="deleteOfflineProject(\'' + id + '\')"></i></label>');
+        $('#openProjectDialog').append('<label class="option"><input type="radio" name="projectId" value="' + id + '" />' + projectList[id] + '<i class="fa fa-times deleteOfflineProject" onclick="deleteOfflineProject(\'' + id + '\')"></i></label>');
     }
     if (flag) $('#openProjectDialog').append('<p>Looks like no circuit has been saved yet. Create a new one and save it!</p>')
     $('#openProjectDialog').dialog({
         width: "auto",
-        buttons: [{
+        buttons: !flag ? [{
             text: "Open Project",
             click: function() {
                 if (!$("input[name=projectId]:checked").val()) return;
                 load(JSON.parse(localStorage.getItem($("input[name=projectId]:checked").val())));
                 $(this).dialog("close");
             },
-        }]
+        }] : []
 
     });
 
@@ -819,15 +825,18 @@ createSubCircuitPrompt = function(scope = globalScope) {
     }
     if (flag) $('#insertSubcircuitDialog').append('<p>Looks like there are no other circuits which doesn\'t have this circuit as a dependency. Create a new one!</p>')
     $('#insertSubcircuitDialog').dialog({
-        width: "auto",
-        buttons: [{
+        maxHeight: 350,
+        width: 250,
+        maxWidth: 250,
+        minWidth: 250,
+        buttons: !flag ? [{
             text: "Insert SubCircuit",
             click: function() {
                 if (!$("input[name=subCircuitId]:checked").val()) return;
                 simulationArea.lastSelected = new SubCircuit(undefined, undefined, globalScope, $("input[name=subCircuitId]:checked").val());
                 $(this).dialog("close");
             },
-        }]
+        }] : []
 
     });
 
@@ -977,4 +986,38 @@ function promptSave(){
     console.log("PROMPT")
     if(confirm("You have not saved your creation! Would you like save your project online? "))
     save()
+}
+
+async function postUserIssue(message) {
+    var img = generateImage("jpeg", "full", false, 1, false).split(',')[1];
+    const result = await $.ajax({
+            url: 'https://api.imgur.com/3/image',
+            type: 'POST',
+            data: {
+                image: img
+            },
+            dataType: 'json',
+            headers: {
+                Authorization: 'Client-ID 9a33b3b370f1054'
+            },
+        });
+
+    message += "\n" + result.data.link;
+    
+    $.ajax({
+        url: '/simulator/post_issue',
+        type: 'POST',
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
+        },
+        data: {
+            "text": message,
+        },
+        success: function(response) {
+            $('#result').html("<i class='fa fa-check' style='color:green'></i> You've successfully submitted the issue. Thanks for improving our platform.");
+        },
+        failure: function(err) {
+            $('#result').html("<i class='fa fa-check' style='color:red'></i> There seems to be a network issue. Please reach out to us at support@ciruitverse.org");
+        }
+    });
 }

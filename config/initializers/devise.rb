@@ -26,6 +26,9 @@ Devise.setup do |config|
   config.omniauth :facebook, ENV['FACEBOOK_CLIENT_ID'], ENV['FACEBOOK_CLIENT_SECRET'],  {
     :info_fields => 'email,name'
   }
+   config.omniauth :github, ENV['GITHUB_CLIENT_ID'], ENV['GITHUB_CLIENT_SECRET'], {
+    :scope => 'read:user'
+  }
 
   config.omniauth :microsoft_office365,ENV['MICROSOFT_CLIENT_ID'], ENV['MICROSOFT_CLIENT_SECRET']
 
@@ -264,10 +267,11 @@ Devise.setup do |config|
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.
   #
-  # config.warden do |manager|
-  #   manager.intercept_401 = false
-  #   manager.default_strategies(scope: :user).unshift :some_external_strategy
-  # end
+  config.warden do |manager|
+    manager.intercept_401 = false
+    manager.default_strategies(scope: :user).unshift :jwt_token
+    manager.failure_app = Circuitverse::FailureApp
+  end
 
   # ==> Mountable engine configurations
   # When using Devise inside an engine, let's call it `MyEngine`, and this engine

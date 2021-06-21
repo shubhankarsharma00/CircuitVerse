@@ -10,8 +10,8 @@ describe ProjectsController, type: :request do
   describe "#get_projects" do
     before do
       @tag = FactoryBot.create(:tag)
-      @projects = [ FactoryBot.create(:project, author: @author),
-      FactoryBot.create(:project, author: @author) ]
+      @projects = [FactoryBot.create(:project, author: @author),
+                   FactoryBot.create(:project, author: @author)]
       @projects.each { |project| FactoryBot.create(:tagging, project: project, tag: @tag) }
     end
 
@@ -27,15 +27,32 @@ describe ProjectsController, type: :request do
     context "project is public" do
       before do
         @project = FactoryBot.create(:project, author: @author, project_access_type: "Public")
+        @visit = FactoryBot.create(:ahoy_visit)
+        allow_any_instance_of(Ahoy::Controller).to receive(:current_visit).and_return(@visit)
       end
 
-      it "shows project and increases views" do
-        expect {
-          get user_project_path(@author, @project)
-          @project.reload
-        }.to change { @project.view }.by(1)
+      context "new visit" do
+        it "shows project and increases views" do
+          expect do
+            get user_project_path(@author, @project)
+            @project.reload
+          end.to change { @project.view }.by(1)
 
-        expect(response.body).to include(@project.name)
+          expect(response.body).to include(@project.name)
+        end
+      end
+
+      context "event for visit already exists" do
+        before do
+          FactoryBot.create(:ahoy_event, visit: @visit, name: "Visited project #{@project.id}")
+        end
+
+        it "does not increase view" do
+          expect do
+            get user_project_path(@author, @project)
+            @project.reload
+          end.to change { @project.view }.by(0)
+        end
       end
     end
 
@@ -60,9 +77,9 @@ describe ProjectsController, type: :request do
 
     context "user has not already starred" do
       it "creates a star" do
-        expect {
+        expect do
           get change_stars_path(@project), xhr: true
-        }.to change { Star.count }.by(1)
+        end.to change(Star, :count).by(1)
       end
     end
 
@@ -72,9 +89,9 @@ describe ProjectsController, type: :request do
       end
 
       it "deletes the star" do
-        expect {
+        expect do
           get change_stars_path(@project), xhr: true
-        }.to change { Star.count }.by(-1)
+        end.to change(Star, :count).by(-1)
       end
     end
   end
@@ -87,10 +104,10 @@ describe ProjectsController, type: :request do
 
     context "project is not an assignment" do
       it "creates a fork" do
-        expect {
+        expect do
           get create_fork_project_path(@project)
           @user.reload
-        }.to change { @user.projects.count }.by(1)
+        end.to change { @user.projects.count }.by(1)
         expect(@user.projects.order("created_at").last.forked_project_id).to eq(@project.id)
       end
     end
@@ -113,19 +130,19 @@ describe ProjectsController, type: :request do
         @user = sign_in_random_user
       end
 
-      let(:create_params) {
+      let(:create_params) do
         {
           project: {
             name: "Test Project",
-            project_access_type: "Public",
+            project_access_type: "Public"
           }
         }
-      }
+      end
 
       it "creates project" do
-        expect {
+        expect do
           post "/users/#{@user.id}/projects", params: create_params
-        }.to change { Project.count }.by(1)
+        end.to change(Project, :count).by(1)
 
         project = Project.all.order("created_at").last
         expect(project.name).to eq("Test Project")
@@ -133,14 +150,14 @@ describe ProjectsController, type: :request do
       end
     end
 
-    describe "#udpate" do
-      let(:udpate_params) {
+    describe "#update" do
+      let(:update_params) do
         {
           project: {
             name: "Updated Name"
           }
         }
-      }
+      end
 
       before do
         @project = FactoryBot.create(:project, author: @author, name: "Test Name")
@@ -152,7 +169,7 @@ describe ProjectsController, type: :request do
         end
 
         it "updates project" do
-          put user_project_path(@author, @project), params: udpate_params
+          put user_project_path(@author, @project), params: update_params
           @project.reload
           expect(@project.name).to eq("Updated Name")
         end
@@ -161,7 +178,7 @@ describe ProjectsController, type: :request do
       context "user other than author is singed in" do
         it "throws project access error" do
           sign_in_random_user
-          put user_project_path(@author, @project), params: udpate_params
+          put user_project_path(@author, @project), params: update_params
           check_project_access_error(response)
         end
       end
@@ -172,12 +189,12 @@ describe ProjectsController, type: :request do
         @project = FactoryBot.create(:project, author: @author)
       end
 
-      context "author is singed in" do
-        it "destorys project" do
+      context "author is signed in" do
+        it "destroys project" do
           sign_in @author
-          expect {
+          expect do
             delete user_project_path(@author, @project)
-          }.to change { Project.count }.by(-1)
+          end.to change(Project, :count).by(-1)
         end
       end
 

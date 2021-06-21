@@ -1,30 +1,56 @@
 <div class="container">
-  <div class="row feature">
-    <div class="col-xs-10 col-lg-6 col-md-8 col-s-10 col-centered">
-      <h2>Change your password</h2>
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 center-image">
+      <%= image_tag "SVGs/login.svg", alt: "Login Sketch", :class => "users-image" %>
+      <h5 class="users-image-text">Welcome back to the Digital Circuit Universe!</h5>
+    </div>
 
-      <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-        <%= devise_error_messages! %>
-        <%= f.hidden_field :reset_password_token %>
-
-        <div class="field">
-          <%= f.label :password, "New password" %><br />
-          <% if @minimum_password_length %>
-            <em>(<%= @minimum_password_length %> characters minimum)</em><br />
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <div class="users-form-container">
+        <h2 class="users-main-heading">Change your password</h2>
+        <%= form_with(model: resource, as: resource_name, url: password_path(resource_name), method: :put, local: true) do |f| %>
+          <% if !resource.errors.empty? %>
+            <div class="error-message">
+              <ul>
+                <% resource.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
           <% end %>
-          <%= f.password_field :password, autofocus: true, autocomplete: "off", placeholder: 'New Password' %>
-        </div>
-
-        <div class="field">
-          <%= f.label :password_confirmation, "Confirm new password" %><br />
-          <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: 'Confirm New Password' %>
-        </div>
-
-        <div class="actions">
-          <%= f.submit "Change my password" %>
-        </div>
-      <% end %>
-      <%= render "users/shared/links" %>
+          <%= f.hidden_field :reset_password_token %>
+          <div class="field form-group">
+            <h6>
+              <%= f.label :password %>
+              <% if @minimum_password_length %>
+                (Minimum <%= @minimum_password_length %> characters)
+              <% end %>
+            </h6>
+            <div class="input-group">
+              <%= f.password_field :password, autofocus: true, autocomplete: "off", class:"form-control form-input" %>
+            </div>
+          </div>
+          <div class="field form-group">
+            <h6><%= f.label :password_confirmation %></h6>
+            <div class="input-group">
+              <%= f.password_field :password_confirmation, autocomplete: "off", class:"form-control form-input" %>
+            </div>
+          </div>
+          <div class="field form-group">
+            <div class="input-group">
+              <%= f.submit "Change my password" ,class:"btn primary-button users-primary-button" %>
+              <%= link_to "Go to Login Page", new_user_session_path, class: "anchor-text mt-2" %>
+            </div>
+          </div>
+          <div class="field form-group">
+            <div class="input-group">
+              <span class="users-text">New User?</span>
+              <%= link_to "Sign Up", new_user_registration_path, class:"anchor-text" %>
+            </div>
+          </div>
+          <%= render "users/shared/links" %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

@@ -4,7 +4,7 @@
 <button onclick="generateDataAndCopyButton()">GenerateData And Copy to Clipboard</button>
 <button onclick="loadDataButton()">Load Data</button>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
-<script src="https://www.github.developerdan.com/table-to-json/javascripts/jquery.tabletojson.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/table-to-json@1.0.0/lib/jquery.tabletojson.min.js"></script>
 <table style="width:100%" contenteditable="true" id="testBenchTable">
     <tr>
         <th colspan="3">INPUTS</th>
@@ -169,7 +169,6 @@ var data={n:0,inputs:[],outputs:[]}
             i++;
         }
         var testData={n:data.length-1,inputs:[],outputs:[]}
-        console.log(attrs)
         var d={}
         for(attr in data[0]){
             d[attr]= {bitWidth:data[0][attr],label:attr,values:[]}
@@ -206,7 +205,6 @@ var data={n:0,inputs:[],outputs:[]}
     }
 
     loadData(data);
-    console.log(generateTestData());
 
 
     function addInpButton(){

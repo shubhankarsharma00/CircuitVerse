@@ -26,15 +26,15 @@ SitemapGenerator::Sitemap.create do
     add user_projects_path(user), lastmod: user.current_sign_in_at
   end
 
-  Project.find_each do |project|
+  Project.open.find_each do |project|
     add user_project_path(project.author, project), lastmod: project.updated_at
   end
 
-  add about_path
+  add about_index_path
   add featured_circuits_path
   add simulator_new_path
   add examples_path
-  add gettingStarted_path
+  add privacy_index_path
   add contribute_path
   add teachers_path
 end

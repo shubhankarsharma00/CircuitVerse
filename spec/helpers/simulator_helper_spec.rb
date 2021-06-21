@@ -3,7 +3,7 @@
 require "rails_helper"
 
 describe SimulatorHelper do
-  include SimulatorHelper
+  include described_class
 
   def data_url(image_str)
     "data:image/jpeg;base64,#{image_str}"
@@ -12,14 +12,11 @@ describe SimulatorHelper do
   describe "#check_to_delete" do
     it "give true for non empty images" do
       expect(check_to_delete(data_url(""))).to be false
-      expect(check_to_delete(data_url(Faker::Alphanumeric.alpha(20)))).to be true
+      expect(check_to_delete(data_url(Faker::Alphanumeric.alpha(number: 20)))).to be true
     end
   end
 
   describe "#return_image_url" do
-    before do
-    end
-
     context "circuit is empty" do
       it "returns image url" do
         expect(return_image_file(data_url("")).path).to end_with("default.png")
@@ -32,33 +29,34 @@ describe SimulatorHelper do
       end
 
       it "creates new preview file" do
-        expect(File).to receive(:new).with(/^preview_.*\.jpeg$/, "wb")
+        expect(File).to receive(:new).with(%r{^tmp/preview_.*\.jpeg$}, "wb")
         return_image_file(data_url(Faker::Alphanumeric.alpha))
       end
     end
   end
 
   describe "#sanitize_data" do
-    let(:data) {
+    let(:data) do
       {
         scopes: [
           {
-            Element: [ { label: "label" } ]
-          }]
+            Element: [{ label: "label" }]
+          }
+        ]
       }
-    }
+    end
 
     before do
       group = FactoryBot.create(:group, mentor: FactoryBot.create(:user))
       assignment = FactoryBot.create(:assignment, group: group, restrictions: ["Element"].to_json)
       @project = FactoryBot.create(:project,
-       author: FactoryBot.create(:user), assignment: assignment, data: "{}")
+                                   author: FactoryBot.create(:user), assignment: assignment)
     end
 
     it "sanitizes project data to populate restricted elements correctly" do
       sanitized_data = sanitize_data(@project, data.to_json)
       expect(JSON.parse(sanitized_data)["scopes"][0]["restrictedCircuitElementsUsed"])
-      .to eq(["Element"])
+        .to eq(["Element"])
     end
   end
 end

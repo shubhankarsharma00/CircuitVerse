@@ -1,35 +1,33 @@
 <% projects.each do |project| %>
-
-    <%if project.check_direct_view_access(current_user) %>
-        <div class="col-sm-4">
-          <div class="card text-center " style="margin-top: 2rem">
-            <div class="card-header card-title">
-              <%= project.name %>
-              <%if !project.assignment_id.nil?%>
-                  <span class="badge badge-primary">Assignment</span>
-              <%end%>
-
-              <span class="badge badge-secondary"><%= project.project_access_type%></span>
-
-            </div>
-            <img class="card-img-top " src="<%= project.image_preview.url %>" alt="<%= project.name%>" >
-            <div class="card-footer ">
-              <style>
-                .btn {
-                  margin-top: 5px;
-                }
-              </style>
-              <a href=  "<%= user_project_path(@user,project) %>" class="btn btn-primary" target="_blank"> More </a>
-              <a href="#" id="<%=project.id%>" class="previewButton btn btn-primary" data-toggle="modal" data-target="#myModal"> View </a>
-              <% if policy(project).user_access? %>
-                  <a href=  "<%= simulator_edit_path(project) %>" class="btn btn-primary" target="_blank"> Launch </a>
-              <% else %>
-                  <a href=  "<%= create_fork_project_path(project) %>" class="btn btn-primary" target="_blank"> Fork! </a>
-              <% end %>
-            </div>
+  <% if policy(project).check_direct_view_access? %>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 users-circuits-column circuit-card-js">
+      <div class="card text-center users-card">
+        <div class="card-header users-card-header">
+          <div class="users-card-name">
+            <p><%= project.name %></p>
+            <span class="tooltiptext"><%= project.name %></span>
+          </div>
+          <div class="users-tag-container">
+            <% if !project.assignment_id.nil? %>
+              <span class="badge search-tag">Assignment</span>
+            <% end %>
+              <span class="badge search-tag"><%= project.project_access_type %></span>
           </div>
         </div>
-    <%end%>
+        <div class="card-body users-card-body">
+          <img class="users-card-image" src="<%= project.image_preview.url %>" alt="<%= project.name %>">
+        </div>
+        <div class="card-footer users-card-footer">
+          <% if policy(project).user_access? %>
+            <a href="<%= simulator_edit_path(project) %>" class="btn primary-button" target="_blank">Launch</a>
+          <% else %>
+            <a href="<%= create_fork_project_path(project) %>" class="btn primary-button" target="_blank">Fork</a>
+          <% end %>
+            <%= link_to 'View', '#', class: "previewButton btn primary-button", data: {toggle: "modal", target: "#projectModal", currentproject: project} %>
+            <a href="<%= user_project_path(project.author_id, project) %>" class="btn primary-button" target="_blank">More</a>
+        </div>
+      </div>
+    </div>
+  <% end %>
 
 <% end %>
-

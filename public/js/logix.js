@@ -1,6 +1,10 @@
 // Size of canvas
 var width;
 var height;
+var listenToSimulator=true; //enables key down listener on the simulator
+
+var createNode=false //Flag to create node when its value ==true
+var stopWire=true //flag for stopoing making Nodes when the second terminal reaches a Node (closed path)
 
 uniqueIdCounter = 0; // To be deprecated
 unit = 10; // size of each division/ not used everywhere, to be deprecated
@@ -33,6 +37,8 @@ layoutMode = false; // Flag for mode
 forceResetNodes = true; // FLag to reset all Nodes
 
 
+
+
 //Exact same name as object constructor
 //This list needs to be updated when new circuitselements are created
 
@@ -51,33 +57,32 @@ function setupElementLists() {
 
 
     function createIcon(element) {
-        return `<div class="icon logixModules" id="${element}" >
+        return `<div class="icon logixModules pointerCursor" id="${element}" >
             <img src= "/img/${element}.svg" >
-            <p class="img__description">${element}</p>    
+            <p class="img__description">${element}</p>
         </div>`;
     }
 
-        let elementHierarchy = metadata.elementHierarchy;
-        for (category in elementHierarchy) {
-            let htmlIcons = '';
+    let elementHierarchy = metadata.elementHierarchy;
+    for (category in elementHierarchy) {
+        let htmlIcons = '';
 
-            let categoryData = elementHierarchy[category];
+        let categoryData = elementHierarchy[category];
 
-            for (let i = 0; i < categoryData.length; i++){
-                let element = categoryData[i];
-                htmlIcons += createIcon(element);
-            }
-                
-            let accordianData = `<div class="panelHeader">${category}</div>
-            <div class="panel" style="overflow-y:hidden">
-              ${htmlIcons}
-            </div>`;
-            
-            $('#menu').append(accordianData);
-            
+        for (let i = 0; i < categoryData.length; i++) {
+            let element = categoryData[i];
+            htmlIcons += createIcon(element);
         }
 
-        
+        let accordionData = `<div class="panelHeader">${category}</div>
+            <div class="panel" style="overflow-y:hidden;">
+              ${htmlIcons}
+            </div>`;
+
+        $('#menu').append(accordionData);
+
+    }
+
 
 }
 
@@ -135,7 +140,7 @@ function hideRestricted() {
 }
 
 function updateRestrictedElementsList() {
-    if(restrictedElements.length === 0) return;
+    if (restrictedElements.length === 0) return;
 
     const restrictedCircuitElementsUsed = globalScope.restrictedCircuitElementsUsed;
     let restrictedStr = "";
@@ -156,11 +161,11 @@ function updateRestrictedElementsList() {
 
 function updateRestrictedElementsInScope(scope = globalScope) {
     // Do nothing if no restricted elements
-    if(restrictedElements.length === 0) return;
+    if (restrictedElements.length === 0) return;
 
     let restrictedElementsUsed = [];
     restrictedElements.forEach((element) => {
-        if(scope[element].length > 0) {
+        if (scope[element].length > 0) {
             restrictedElementsUsed.push(element);
         }
     });
@@ -260,7 +265,7 @@ function Scope(name = "localScope", id = undefined) {
         height: 40,
         title_x: 50,
         title_y: 13,
-        titleEnabled:true,
+        titleEnabled: true,
     }
 
 
@@ -298,7 +303,7 @@ Scope.prototype.addInputs = function() {
 
 }
 
-// Ticks clocks recursively -- needs to be deprecated and syncronize all clocks with a global clock
+// Ticks clocks recursively -- needs to be deprecated and synchronize all clocks with a global clock
 Scope.prototype.clockTick = function() {
     for (var i = 0; i < this.Clock.length; i++)
         this.Clock[i].toggleState(); //tick clock!
@@ -340,7 +345,7 @@ Scope.prototype.fixLayout = function() {
         this.layout.height = max_y + 10;
 }
 
-// Funciton which centers the circuit to the correct zoom level
+// Function which centers the circuit to the correct zoom level
 Scope.prototype.centerFocus = function(zoomIn = true) {
     if (layoutMode) return;
     findDimensions(this);
@@ -428,7 +433,6 @@ function setup() {
         }
     }, 1000);
 
-    
 
 }
 
@@ -494,7 +498,7 @@ function resetup() {
     }
 
     updateCanvas = true;
-    update(); // INEFFICENT, needs to be deprecated
+    update(); // INEFFICIENT, needs to be deprecated
     simulationArea.prevScale = 0;
     dots(true, false);
 }
@@ -919,6 +923,7 @@ function copy(copyList, cut = false) {
         data.scopes.push(backUp(scopeList[id]));
 
     }
+
     for (var i = 0; i < requiredDependencies.length; i++)
         saveScope(requiredDependencies[i]);
 
@@ -939,14 +944,14 @@ function copy(copyList, cut = false) {
 }
 
 // Function selects all the elements from the scope
-function selectAll(scope = globalScope){
-    circuitElementList.forEach((val,_,__)=>{
-        if(scope.hasOwnProperty(val)) {
+function selectAll(scope = globalScope) {
+    circuitElementList.forEach((val, _, __) => {
+        if (scope.hasOwnProperty(val)) {
             simulationArea.multipleObjectSelections.push(...scope[val]);
         }
     });
 
-    if(scope.nodes) {
+    if (scope.nodes) {
         simulationArea.multipleObjectSelections.push(...scope.nodes);
     }
 }
@@ -1091,11 +1096,11 @@ CircuitElement.prototype.checkHover = function() {
     }
 }
 
-//This sets the width and height of the element if its rectangluar
+//This sets the width and height of the element if its rectangular
 // and the reference point is at the center of the object.
 //width and height define the X and Y distance from the center.
 //Effectively HALF the actual width and height.
-// NOT OVERIDABLE
+// NOT OVERRIDABLE
 CircuitElement.prototype.setDimensions = function(width, height) {
     this.leftDimensionX = this.rightDimensionX = width;
     this.downDimensionY = this.upDimensionY = height;
@@ -1109,7 +1114,7 @@ CircuitElement.prototype.setHeight = function(height) {
 
 // The update method is used to change the parameters of the object on mouse click and hover.
 // Return Value: true if state has changed else false
-// NOT OVERIDABLE
+// NOT OVERRIDABLE
 
 // When true this.isHover() will not rotate bounds. To be used when bounds are set manually.
 CircuitElement.prototype.overrideDirectionRotation = false;
@@ -1214,7 +1219,7 @@ CircuitElement.prototype.fixDirection = function() {
 
 // The isHover method is used to check if the mouse is hovering over the object.
 // Return Value: true if mouse is hovering over object else false
-// NOT OVERIDABLE
+// NOT OVERRIDABLE
 CircuitElement.prototype.isHover = function() {
 
     var mX = simulationArea.mouseXf - this.x;
@@ -1252,13 +1257,13 @@ CircuitElement.prototype.setLabel = function(label) {
 CircuitElement.prototype.propagationDelayFixed = false;
 
 //Method that draws the outline of the module and calls draw function on module Nodes.
-//NOT OVERIDABLE
+//NOT OVERRIDABLE
 CircuitElement.prototype.draw = function() {
     var ctx = simulationArea.context;
     this.checkHover();
     if (this.x * this.scope.scale + this.scope.ox < -this.rightDimensionX * this.scope.scale - 00 || this.x * this.scope.scale + this.scope.ox > width + this.leftDimensionX * this.scope.scale + 00 || this.y * this.scope.scale + this.scope.oy < -this.downDimensionY * this.scope.scale - 00 || this.y * this.scope.scale + this.scope.oy > height + 00 + this.upDimensionY * this.scope.scale) return;
 
-    // Draws rectangle and highlighs
+    // Draws rectangle and highlights
     if (this.rectangleObject) {
         ctx.strokeStyle = "black";
         ctx.fillStyle = "white";
@@ -1413,48 +1418,32 @@ CircuitElement.prototype.resolve = function() {
 
 }
 
+// Graph algorithm to resolve verilog wire labels
 CircuitElement.prototype.processVerilog = function() {
+    // Output count used to sanitize output
+    var output_total = 0;
+    for (var i = 0; i < this.nodeList.length; i++) {
+        if (this.nodeList[i].type == NODE_OUTPUT && this.nodeList[i].connections.length > 0)
+          output_total++;
+    }
+
     var output_count = 0;
     for (var i = 0; i < this.nodeList.length; i++) {
         if (this.nodeList[i].type == NODE_OUTPUT) {
-            this.nodeList[i].verilogLabel = this.nodeList[i].verilogLabel || (this.verilogLabel + "_" + (verilog.fixName(this.nodeList[i].label) || ("out_" + output_count)));
-            if (this.objectType != "Input" && this.nodeList[i].connections.length > 0) {
-                if (this.scope.verilogWireList[this.bitWidth] != undefined) {
-                    if (!this.scope.verilogWireList[this.bitWidth].contains(this.nodeList[i].verilogLabel))
-                        this.scope.verilogWireList[this.bitWidth].push(this.nodeList[i].verilogLabel);
-                } else
-                    this.scope.verilogWireList[this.bitWidth] = [this.nodeList[i].verilogLabel];
+            if (this.objectType != "Input" && this.objectType != "Clock" && this.nodeList[i].connections.length > 0) {
+                this.nodeList[i].verilogLabel =
+                    verilog.generateNodeName(this.nodeList[i], output_count, output_total);
+
+                if (!this.scope.verilogWireList[this.nodeList[i].bitWidth].contains(this.nodeList[i].verilogLabel))
+                    this.scope.verilogWireList[this.nodeList[i].bitWidth].push(this.nodeList[i].verilogLabel);
+                output_count++;
             }
             this.scope.stack.push(this.nodeList[i]);
-            output_count++;
         }
     }
 }
 
-CircuitElement.prototype.isVerilogResolvable = function() {
-
-    var backupValues = []
-    for (var i = 0; i < this.nodeList.length; i++) {
-        backupValues.push(this.nodeList[i].value);
-        this.nodeList[i].value = undefined;
-    }
-
-    for (var i = 0; i < this.nodeList.length; i++) {
-        if (this.nodeList[i].verilogLabel) {
-            this.nodeList[i].value = 1;
-        }
-    }
-
-    var res = this.isResolvable();
-
-    for (var i = 0; i < this.nodeList.length; i++) {
-        this.nodeList[i].value = backupValues[i];
-    }
-
-    return res;
-}
-
-CircuitElement.prototype.removePropogation = function() {
+CircuitElement.prototype.removePropagation = function() {
     for (var i = 0; i < this.nodeList.length; i++) {
         if (this.nodeList[i].type == NODE_OUTPUT) {
             if (this.nodeList[i].value !== undefined) {
@@ -1469,25 +1458,76 @@ CircuitElement.prototype.verilogName = function() {
     return this.verilogType || this.objectType;
 }
 
-CircuitElement.prototype.generateVerilog = function() {
+CircuitElement.prototype.verilogBaseType = function() {
+    return this.verilogName();
+}
 
+CircuitElement.prototype.verilogParametrizedType = function() {
+    var type = this.verilogBaseType();
+    // Suffix bitwidth for multi-bit inputs
+    // Example: DflipFlop #(2) DflipFlop_0
+    if (this.bitWidth != undefined && this.bitWidth > 1)
+        type += " #(" + this.bitWidth + ")";
+    return type
+}
+
+// Generates final verilog code for each element
+CircuitElement.prototype.generateVerilog = function() {
+    // Example: and and_1(_out, _out, _Q[0]);
     var inputs = [];
     var outputs = [];
-
 
     for (var i = 0; i < this.nodeList.length; i++) {
         if (this.nodeList[i].type == NODE_INPUT) {
             inputs.push(this.nodeList[i]);
         } else {
-            outputs.push(this.nodeList[i]);
+            if (this.nodeList[i].connections.length > 0)
+                outputs.push(this.nodeList[i]);
+            else
+                outputs.push(""); // Don't create a wire
         }
     }
 
     var list = outputs.concat(inputs);
-    var res = this.verilogName() + " " + this.verilogLabel + " (" + list.map(function(x) {
-        return x.verilogLabel
-    }).join(",") + ");";
+    var res = this.verilogParametrizedType();
+    var moduleParams = list.map(x => x.verilogLabel).join(", ");
+    res += ` ${this.verilogLabel}(${moduleParams});`;
+    return res;
+}
 
+// Generates final verilog code for each element
+// Gate = &/|/^
+// Invert is true for xNor, Nor, Nand
+function gateGenerateVerilog(gate, invert = false) {
+    var inputs = [];
+    var outputs = [];
+
+    for (var i = 0; i < this.nodeList.length; i++) {
+        if (this.nodeList[i].type == NODE_INPUT) {
+            inputs.push(this.nodeList[i]);
+        } else {
+            if (this.nodeList[i].connections.length > 0)
+                outputs.push(this.nodeList[i]);
+            else
+                outputs.push(""); // Don't create a wire
+        }
+    }
+
+    var res = "assign ";
+    if (outputs.length == 1)
+        res += outputs[0].verilogLabel;
+    else
+        res += `{${outputs.map(x => x.verilogLabel).join(", ")}}`;
+
+    res += " = ";
+
+    var inputParams = inputs.map(x => x.verilogLabel).join(` ${gate} `);
+    if(invert) {
+        res += `~(${inputParams});`;
+    }
+    else {
+        res += inputParams + ';';
+    }
     return res;
 }
 

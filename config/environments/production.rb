@@ -83,19 +83,13 @@ Rails.application.configure do
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
 
   # Mailer settings
-  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.delivery_method = :ses
   config.action_mailer.default_url_options = { host: "https://circuitverse.org/" }
+  config.action_mailer.asset_host = 'https://circuitverse.org'
 
-    config.action_mailer.smtp_settings = {
-     :address              => 'smtp.yandex.com',
-     :port                 => 465,
-     :domain               => 'yandex.com',
-     :user_name            => ENV["CIRCUITVERSE_EMAIL_ID"],
-     :password             => ENV["CIRCUITVERSE_EMAIL_PASSWORD"],
-     :ssl                  => true,
-     :authentication       => :login,
-     :enable_starttls_auto => true,
- }
+
+  config.vapid_public_key = ENV["VAPID_PUBLIC_KEY"]
+  config.vapid_private_key = ENV["VAPID_PRIVATE_KEY"]
 
   if ENV["RAILS_LOG_TO_STDOUT"].present?
     logger           = ActiveSupport::Logger.new(STDOUT)
@@ -104,6 +98,7 @@ Rails.application.configure do
   end
 
 
+  config.action_controller.forgery_protection_origin_check = false 
   Paperclip.options[:command_path] = "/usr/bin/"
   config.active_job.queue_adapter = :sidekiq
 

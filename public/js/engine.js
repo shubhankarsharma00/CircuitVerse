@@ -279,6 +279,13 @@ function renderCanvas(scope) {
         ctx.stroke();
         ctx.fill();
     }
+    if (simulationArea.hover != undefined) {
+        simulationArea.canvas.style.cursor = "pointer";
+    } else if (createNode) {
+        simulationArea.canvas.style.cursor = 'grabbing';
+    } else {
+        simulationArea.canvas.style.cursor = 'default';
+    }
 
 }
 
@@ -303,7 +310,7 @@ function play(scope = globalScope, resetNodes = false) {
     //     // clearBuses(scope);
     //     for(var i=0;i<scope.TriState.length;i++) {
     //         // console.log("HIT2",i);
-    //         scope.TriState[i].removePropogation();
+    //         scope.TriState[i].removePropagation();
     //     }
     // }
 

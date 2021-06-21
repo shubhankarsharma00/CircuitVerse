@@ -10,9 +10,20 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require rails-ujs
 //= require_tree .
 //= require jquery
-//= require jquery_ujs
+//= require rails-ujs
 //= require commontator/application
 //= require bootstrap-typeahead-rails
+//= require bootstrap/dist/js/bootstrap.min.js
+//= require serviceworker-companion
+//= require restrictElements.js
+//= require time.js
+//= require scroll.js
+//= require trumbowyg/dist/trumbowyg.min.js
+//= require trumbowyg/dist/plugins/colors/trumbowyg.colors.js
+//= require trumbowyg/dist/plugins/pasteembed/trumbowyg.pasteembed.min.js
+//= require trumbowyg/dist/plugins/upload/trumbowyg.upload.min.js
+//= require jquery-resizable-dom/dist/jquery-resizable.min.js
+//= require trumbowyg/dist/plugins/resizimg/trumbowyg.resizimg.min.js
+//= require trumbowyg/dist/plugins/fontfamily/trumbowyg.fontfamily.min.js

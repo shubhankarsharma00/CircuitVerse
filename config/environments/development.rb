@@ -52,21 +52,30 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   config.active_job.queue_adapter = :sidekiq
-  config.action_mailer.default_url_options = { host: "http://localhost:8080/" }
-  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.default_url_options = { host: "localhost:3000" }
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
 
   config.action_mailer.smtp_settings = {
-  :address              => 'smtp.yandex.com',
-  :port                 => 465,
-  :domain               => 'yandex.com',
-  :user_name            => ENV["CIRCUITVERSE_EMAIL_ID"],
-  :password             =>  ENV["CIRCUITVERSE_EMAIL_PASSWORD"],
-  :ssl                  => true,
-  :authentication       => :login,
-  :enable_starttls_auto => true,
-}
+    :address              => 'smtp.yandex.com',
+    :port                 => 465,
+    :domain               => 'yandex.com',
+    :user_name            => ENV["CIRCUITVERSE_EMAIL_ID"],
+    :password             =>  ENV["CIRCUITVERSE_EMAIL_PASSWORD"],
+    :ssl                  => true,
+    :authentication       => :login,
+    :enable_starttls_auto => true,
+  }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = { :address => "localhost", :port => 1025 }
+  config.vapid_public_key = ENV["VAPID_PUBLIC_KEY"] || "BGxnigbQCa435vZ8_3uFdqLC0XJHXtONgEdI-ydMMs0JaBsnpUfLxR1UDagq6_cDwHyhqjw77tTlp0ULZkx8Xos="
+  config.vapid_private_key = ENV["VAPID_PRIVATE_KEY"] || "FkEMkOQHvMybUlCGH-DsOljTJlLzYGb3xEYsFY5Roxk="
 
-Paperclip.options[:command_path] = "/usr/local/bin/"
+  Rails.application.configure do
+    # Whitelist gitpod domain in dev envionment
+    config.hosts << /.*\.gitpod\.io\Z/
+    config.hosts << /.*\Z/ # Whitelist everything in Dev
+  end
+
+  Paperclip.options[:command_path] = "/usr/local/bin/"
 end

@@ -1,19 +1,17 @@
-<div class="container">
-  <div class="row feature">
 
-    <div class="container">
+<% content_for :title,  @project.name + " - Edit Project" %>
 
-      <h1>Editing Project</h1>
-
-      <%= render 'form', project: @project %>
-
-      <%= link_to 'Show', user_project_path(current_user,@project) %> |
-      <%= link_to 'Back', user_path(@author)%>
-
+<div class="container projects-new-container">
+  <div class="row center-row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <h1 class="submain-heading">Edit Project</h1> <br>
     </div>
-    <br/>
-
-    <br/>
-
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <div class="form-container">
+        <%= render 'form', project: @project %>
+      </div>
+    </div>
   </div>
 </div>

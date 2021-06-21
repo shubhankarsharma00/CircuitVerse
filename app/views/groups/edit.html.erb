@@ -1,23 +1,21 @@
+
+<% content_for :title, @group.name + " - Edit Group Name" %>
 <div class="container">
-  <div class="row feature">
-
-    <div class="col">
-      <h1>Editing Group</h1>
-
-      <%= render 'form', group: @group %>
-
-      <%= link_to 'Show', @group %> |
-      <%= link_to 'Back', user_groups_path(current_user) %>
-
+  <div class="row center-row">
+    <div class="col-xs col-sm col-md col-lg">
+      <h2 class="submain-heading">EDIT GROUP NAME</h2>
     </div>
-
-
   </div>
-  <br />
-
-  <br />
-
-
-
+  <div class="row center-row">
+    <div class="col-xs-12 col-sm-12 col-md-5 col-lg-6">
+      <%= image_tag "PNGs/editGroupName.png", alt: "Group Sketch", :class => "groups-center-image center-image" %>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-6">
+      <div class="container">
+        <div class="center-row groups-background-card">
+          <%= render 'form', group: @group %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-

@@ -23,11 +23,23 @@ class AssignmentDecorator < SimpleDelegator
   end
 
   def restricted_circuit_elements
-    restriced_elements_str = JSON.parse(assignment.restrictions).reduce("") do |str, element|
+    restricted_elements_str = JSON.parse(assignment.restrictions).reduce("") do |str, element|
       str += "#{element}, "
       str
     end
 
-    restriced_elements_str.present? ? restriced_elements_str.slice(0..-3) : "None"
+    restricted_elements_str.present? ? restricted_elements_str.slice(0..-3) : "None"
+  end
+
+  def closed?
+    assignment.status == "closed"
+  end
+
+  def time_remaining
+    str = ""
+    str += "#{(assignment.deadline.to_i - Time.current.to_i) / 1.day} days "
+    str += "#{((assignment.deadline.to_i - Time.now.to_i) / 1.hour) % 24} hours"
+    str += " #{((assignment.deadline.to_i - Time.now.to_i) / 1.minute) % 60} minutes"
+    str
   end
 end

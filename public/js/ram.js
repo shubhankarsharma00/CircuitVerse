@@ -54,6 +54,7 @@ RAM.prototype.tooltipText = "Random Access Memory";
 RAM.prototype.shortName = "RAM";
 RAM.prototype.maxAddressWidth = 20;
 RAM.prototype.constructor = RAM;
+RAM.prototype.helplink = "https://docs.circuitverse.org/#/memoryElements?id=ram";
 RAM.prototype.mutableProperties = {
     "addressWidth": {
         name: "Address Width",
@@ -174,4 +175,28 @@ RAM.prototype.dump = function () {
     if (logLabel) {
         console.groupEnd();
     }
+}
+//This is a RAM without a clock - not normal
+//reset is not supported
+RAM.moduleVerilog = function () {
+  return `
+module RAM(dout, addr, din, we, dmp, rst);
+  parameter WIDTH = 8;
+  parameter ADDR = 10;
+  output [WIDTH-1:0] dout;
+  input [ADDR-1:0] addr;
+  input [WIDTH-1:0] din;
+  input we;
+  input dmp;
+  input rst;
+  reg [WIDTH-1:0] mem [2**ADDR-1:0];
+
+  assign dout = mem[addr];
+
+  always @ (*) begin
+    if (!we)
+      mem[addr] = din;
+  end
+endmodule
+`;
 }
